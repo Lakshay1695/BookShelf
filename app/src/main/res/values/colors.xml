@@ -5,5 +5,7 @@
     <color name="colorYellow">#fcfd59</color>
     <color name="colorCarrot">#ff6974</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#bebebe</color>
 
 </resources>
