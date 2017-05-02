@@ -18,10 +18,16 @@ public class SplashActivity extends AppCompatActivity {
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 101){
+            if (msg.what == 102){
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
+            }else if (msg.what == 101){
+                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+
             }
         }
     };
