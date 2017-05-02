@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="es.esy.raghavwahi.bookshelf.RegisterActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingTop="22dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint=" Enter Your Name"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint=" Enter Your Phone No."
+        android:layout_marginTop="22dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint=" Enter Your Email Id"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
+        android:hint=" Enter Your Password"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+
+    <EditText
+        android:id="@+id/editTextPasswordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
+        android:hint=" Confirm Your Password"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:hint=" Enter Your Age"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/colorCarrot"
+        android:backgroundTint="@color/colorCarrot"
+        android:textColorHint="@color/colorSkyBlue"/>
+
+        <Button
+        android:id="@+id/button"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:text="Next"
+        android:textColor="@color/colorCarrot"
+        android:textSize="14sp"
+        android:backgroundTint="@color/colorWhite" />
+    </LinearLayout>
+</ScrollView>
