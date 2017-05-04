@@ -30,7 +30,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:hint="Enter Your Email Id"
         android:textColorHint="@color/colorSkyBlue"
         android:textColor="@color/colorCarrot"
