@@ -55,9 +55,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         sharedPreferences = getSharedPreferences("userPrefs",MODE_PRIVATE);
         editor = sharedPreferences.edit();
-
-        String name = sharedPreferences.getString("keyPassword","NA");
-        eTxtName.setText(name);
     }
 
     @Override
@@ -67,18 +64,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setName(eTxtName.getText().toString().trim());
             user.setPhone(eTxtPhone.getText().toString().trim());
             user.setEmail(eTxtEmail.getText().toString().trim());
-            if (eTxtPassword.getText().toString().trim()== eTxtPasswordConfirm.getText().toString().trim()){
+
+            if (eTxtPassword.getText().toString().trim().equals(eTxtPasswordConfirm.getText().toString().trim())){
                 user.setPassword(eTxtPassword.getText().toString().trim());
-            }else{
-                Toast.makeText(this,"Password is Not Same",Toast.LENGTH_LONG).show();
             }
-//Password is not same. has to resolve this issue and do further coding after shared prefrences.
             //Write Data in SP(XML File)
             editor.putString("keyName",user.getName());
             editor.putString("keyPhone",user.getPhone());
             editor.putString("keyEmail",user.getEmail());
             editor.putString("keyPassword",user.getPassword());
-            editor.commit(); //Save
+            editor.commit(); //Save data
 
         }else if (id ==R.id.imageViewLoginLink){
             Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
