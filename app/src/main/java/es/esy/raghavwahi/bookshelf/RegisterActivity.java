@@ -10,6 +10,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -80,5 +89,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
             finish();
         }
+    }
+
+    void insertIntoCloud(){
+
+        //Volley String Request
+        StringRequest request = new StringRequest(Request.Method.POST, Util.INSERT_USER_PHP, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    int success = jsonObject.getInt("success");
+                    String message = jsonObject.getString("message");
+                    if (success == 1){
+                        Toast.makeText(RegisterActivity.this,message,Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(RegisterActivity.this,message,Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(RegisterActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        } );
     }
 }
