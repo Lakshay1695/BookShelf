@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "704480760198",
+    "firebase_url": "https://bookshelf-89978.firebaseio.com",
+    "project_id": "bookshelf-89978",
+    "storage_bucket": "bookshelf-89978.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704480760198:android:0f83c9bacc873587",
+        "android_client_info": {
+          "package_name": "es.esy.raghavwahi.bookshelf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704480760198-fh0o61aqvp3k035934vcio3j39ka20dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3MFW6X_71lzlccXDWMuMZqs7CF9shlBA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

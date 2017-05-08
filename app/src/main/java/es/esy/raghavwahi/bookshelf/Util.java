@@ -3,8 +3,8 @@ package es.esy.raghavwahi.bookshelf;
 
 public class Util {
 
-    final static String URI = "http://www.raghavwahi.esy.es/BookShelf";
+    final static String URI = "http://www.raghavwahi.esy.es/bookshelf";
 
     //URL
-    public static final String INSERT_USER_PHP = URI+"/insertUser.php";
+    public static final String INSERT_USER_PHP = URI+"/insert.php";
 }
