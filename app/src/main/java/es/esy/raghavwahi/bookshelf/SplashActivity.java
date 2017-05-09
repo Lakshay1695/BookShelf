@@ -34,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
             if (msg.what == 102){
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(intent);
+                finish();
             }else if (msg.what == 101){
                 Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                 startActivity(intent);
