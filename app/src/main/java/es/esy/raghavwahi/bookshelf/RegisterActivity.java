@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         requestQueue = Volley.newRequestQueue(this);
 
-        sharedPreferences = getSharedPreferences("userPrefs",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Util.PREFS_NAME,MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }else{
                         //Code when account creation is unsuccessful with the reason.
                     }
@@ -138,10 +139,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setPassword(eTxtPassword.getText().toString().trim());
 
             //Write Data in SP(XML File)
-            editor.putString("keyName",user.getName());
-            editor.putString("keyPhone",user.getPhone());
-            editor.putString("keyEmail",user.getEmail());
-            editor.putString("keyPassword",user.getPassword());
+            editor.putString(Util.KEY_NAME,user.getName());
+            editor.putString(Util.KEY_PHONE,user.getPhone());
+            editor.putString(Util.KEY_EMAIL,user.getEmail());
+            editor.putString(Util.KEY_PASSWORD,user.getPassword());
             editor.commit(); //Save data
 
             insertIntoCloudDB();
