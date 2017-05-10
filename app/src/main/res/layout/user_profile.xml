@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingBottom="16dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="147dp"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="88dp"
-        android:text="User Profile" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/profile_picture_sample"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="16dp"/>
 
-</RelativeLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:hint="Enter your bio"
+            android:gravity="top"
+            android:textSize="15sp"
+            android:backgroundTint="@color/colorCarrot"
+            android:textColorHint="@color/colorSkyBlue"
+            android:textColor="@color/colorCarrot"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/editTextbio" />
+
+        <Button
+            android:id="@+id/buttonSubmitBio"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@color/colorCarrot"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextbio"
+            android:layout_marginTop="5dp"
+            android:text="go"
+            android:textSize="10sp"
+            android:textColor="@color/colorWhite"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonEdit"
+            android:layout_width="21dp"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView"
+            android:background="@android:drawable/ic_menu_edit" />
+
+        <Button
+            android:id="@+id/buttonEditProfile"
+            android:layout_width="270dp"
+            android:layout_height="55dp"
+            android:textColor="@color/colorCarrot"
+            android:text="Edit Profile"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:backgroundTint="@color/colorWhite"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/buttonSubmitBio"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:textColor="@color/colorWhite"
+            android:text="Logout"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:backgroundTint="@color/colorSkyBlue"
+            android:layout_marginTop="54dp"
+            android:layout_below="@+id/buttonEditProfile"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    </ScrollView>
