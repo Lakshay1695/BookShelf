@@ -15,7 +15,7 @@
         android:paddingBottom="16dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageProPhoto"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_alignParentTop="true"
@@ -27,7 +27,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/imageProPhoto"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:ems="10"
@@ -42,16 +42,16 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/editTextbio" />
+            android:id="@+id/editTextUserbio" />
 
         <Button
-            android:id="@+id/buttonSubmitBio"
+            android:id="@+id/buttonSubmitUserBio"
             android:layout_width="50dp"
             android:layout_height="20dp"
             android:background="@color/colorCarrot"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextbio"
+            android:layout_below="@+id/editTextUserbio"
             android:layout_marginTop="5dp"
             android:text="go"
             android:textSize="10sp"
@@ -61,11 +61,11 @@
             android:id="@+id/imageButtonEdit"
             android:layout_width="21dp"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/imageView"
+            android:layout_alignTop="@+id/imageProPhoto"
             android:layout_marginLeft="17dp"
             android:layout_marginStart="17dp"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageProPhoto"
+            android:layout_toRightOf="@+id/imageProPhoto"
             android:background="@android:drawable/ic_menu_edit" />
 
         <Button
@@ -78,7 +78,7 @@
             android:textSize="14sp"
             android:backgroundTint="@color/colorWhite"
             android:layout_marginTop="35dp"
-            android:layout_below="@+id/buttonSubmitBio"
+            android:layout_below="@+id/buttonSubmitUserBio"
             android:layout_centerHorizontal="true" />
 
         <Button
