@@ -1,11 +1,17 @@
 package es.esy.raghavwahi.bookshelf;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -48,6 +54,7 @@ public class UserProfile extends Fragment implements View.OnClickListener{
         btnEditProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
 
+
         return view;
 
     }
@@ -56,16 +63,39 @@ public class UserProfile extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         int id=v.getId();
         if (id==R.id.buttonLogout){
-            Toast.makeText(getContext(),"You Clicked on Logout",Toast.LENGTH_LONG).show();
+
         }else if (id==R.id.buttonEditProfile){
-            Toast.makeText(getContext(),"You Clicked on Edit Profile",Toast.LENGTH_LONG).show();
+
         }else if (id==R.id.buttonSubmitUserBio){
-            Toast.makeText(getContext(),"You Clicked on Submit Bio",Toast.LENGTH_LONG).show();
+
         }else if (id==R.id.imageButtonEdit){
-            Toast.makeText(getContext(),"You Clicked on Edit Photo",Toast.LENGTH_LONG).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.Theme_MyDialog);
+            builder.setTitle("Profile photo from");
+            String[] options = {"Camera","Gallery","Remove photo"};
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    switch (which){
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                    }
+                }
+            });
+            builder.create().show();
         }else if (id==R.id.imageProPhoto){
-            Toast.makeText(getContext(),"You Clicked on Photo",Toast.LENGTH_LONG).show();
+            Intent i= new Intent(getActivity(),ProfilePhoto.class);
+            startActivity(i);
         }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
 }
