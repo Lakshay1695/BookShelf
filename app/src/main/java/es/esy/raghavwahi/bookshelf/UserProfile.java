@@ -1,12 +1,18 @@
 package es.esy.raghavwahi.bookshelf;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +24,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class UserProfile extends Fragment implements View.OnClickListener{
+
 
     @InjectView(R.id.imageProPhoto)
     ImageView imgProfilePhoto;
@@ -40,6 +52,8 @@ public class UserProfile extends Fragment implements View.OnClickListener{
 
     @InjectView(R.id.buttonLogout)
     Button btnLogout;
+
+    String ProfilePhotoPath;
 
     @Nullable
     @Override
@@ -78,24 +92,59 @@ public class UserProfile extends Fragment implements View.OnClickListener{
 
                     switch (which){
                         case 0:
+                            try{
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, Util.REQUEST_IMAGE_CAPTURE);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                             break;
+
                         case 1:
+                            //Image from gallery
                             break;
+
                         case 2:
+                            //to remove the image. condition(if the image is other than drawable resourced image) only then we can have this option.
+                            // and upon removing the image the source would be the drawable one.
                             break;
                     }
                 }
             });
             builder.create().show();
         }else if (id==R.id.imageProPhoto){
-            Intent i= new Intent(getActivity(),ProfilePhoto.class);
-            startActivity(i);
+            Intent intent= new Intent(getActivity(),ProfilePhoto.class);
+            startActivity(intent);
         }
-
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode ==Util.REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK){
+            Bundle bundle = data.getExtras();
+            Util.PHOTO_URI = data.getData();
+            performCrop();
+            Bitmap userImage = (Bitmap) bundle.get("data");
+            imgProfilePhoto.setImageBitmap(userImage);
+        }
+    }
+
+    private void performCrop(){
+        try{
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+            cropIntent.setDataAndType(Util.PHOTO_URI,"image/*");
+            cropIntent.putExtra("crop","true");
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            cropIntent.putExtra("scale", true);
+            cropIntent.putExtra("outputX", 256);
+            cropIntent.putExtra("outPutY", 256);
+            cropIntent.putExtra("return-data", true);
+            startActivityForResult(cropIntent, Util.REQUEST_IMAGE_CROP);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
