@@ -3,13 +3,16 @@ package es.esy.raghavwahi.bookshelf;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
@@ -53,7 +56,8 @@ public class UserProfile extends Fragment implements View.OnClickListener{
     @InjectView(R.id.buttonLogout)
     Button btnLogout;
 
-    String ProfilePhotoPath;
+    Uri photoUri;
+
 
     @Nullable
     @Override
@@ -92,16 +96,28 @@ public class UserProfile extends Fragment implements View.OnClickListener{
 
                     switch (which){
                         case 0:
+                            //Camera
                             try{
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, Util.REQUEST_IMAGE_CAPTURE);
-                            }catch (Exception e){
+                                Intent camIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                File file = new File(Environment.getExternalStorageDirectory(),"file"+String.valueOf(System.currentTimeMillis()+".jpg"));
+                                photoUri = Uri.fromFile(file);
+                                camIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
+                                camIntent.putExtra("return-data",true);
+                                startActivityForResult(camIntent, Util.REQUEST_IMAGE_CAPTURE);
+
+                            }catch (ActivityNotFoundException e){
                                 e.printStackTrace();
-                            }
+                                }
                             break;
 
                         case 1:
-                            //Image from gallery
+                            //Gallery
+                            try{
+                                Intent galIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(Intent.createChooser(galIntent,"Select Image From Gallery"),Util.REQUEST_IMAGE_GALLERY);
+                            }catch (ActivityNotFoundException e){
+                                e.printStackTrace();
+                            }
                             break;
 
                         case 2:
@@ -112,6 +128,7 @@ public class UserProfile extends Fragment implements View.OnClickListener{
                 }
             });
             builder.create().show();
+
         }else if (id==R.id.imageProPhoto){
             Intent intent= new Intent(getActivity(),ProfilePhoto.class);
             startActivity(intent);
@@ -121,30 +138,40 @@ public class UserProfile extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode ==Util.REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK){
-            Bundle bundle = data.getExtras();
-            Util.PHOTO_URI = data.getData();
-            performCrop();
-            Bitmap userImage = (Bitmap) bundle.get("data");
-            imgProfilePhoto.setImageBitmap(userImage);
+        if (requestCode == Util.REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK){
+            cropImage();
+        }else if (requestCode == Util.REQUEST_IMAGE_GALLERY ){
+            if (data!=null){
+                photoUri = data.getData();
+                cropImage();
+            }
+        }else if (requestCode == Util.REQUEST_IMAGE_CROP){
+            if (data!=null){
+                Bundle bundle = data.getExtras();
+                Bitmap userImage = bundle.getParcelable("data");
+                imgProfilePhoto.setImageBitmap(userImage);
+            }
         }
-    }
 
-    private void performCrop(){
+    }
+    private void cropImage(){
         try{
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
-            cropIntent.setDataAndType(Util.PHOTO_URI,"image/*");
-            cropIntent.putExtra("crop","true");
-            cropIntent.putExtra("aspectX", 1);
-            cropIntent.putExtra("aspectY", 1);
-            cropIntent.putExtra("scale", true);
-            cropIntent.putExtra("outputX", 256);
-            cropIntent.putExtra("outPutY", 256);
-            cropIntent.putExtra("return-data", true);
-            startActivityForResult(cropIntent, Util.REQUEST_IMAGE_CROP);
+            cropIntent.setDataAndType(photoUri,"image/*");
 
-        }catch (Exception e){
+            cropIntent.putExtra("crop","true");
+            cropIntent.putExtra("outputX",256);
+            cropIntent.putExtra("outputY",256);
+            cropIntent.putExtra("aspectX",1);
+            cropIntent.putExtra("aspectY",1);
+            cropIntent.putExtra("scaleUpIfNeeded",true);
+            cropIntent.putExtra("return-data",true);
+
+            startActivityForResult(cropIntent,Util.REQUEST_IMAGE_CROP);
+        }catch (ActivityNotFoundException e){
             e.printStackTrace();
         }
+
     }
+
 }

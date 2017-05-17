@@ -20,7 +20,7 @@ public class Util {
     //Request
     public static final int REQUEST_IMAGE_CAPTURE = 51;
     public static final int REQUEST_IMAGE_CROP = 215;
+    public static final int REQUEST_IMAGE_GALLERY = 256;
 
     //URI
-    public static Uri PHOTO_URI = null;
 }
