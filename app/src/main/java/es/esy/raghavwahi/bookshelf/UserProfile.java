@@ -1,8 +1,6 @@
 package es.esy.raghavwahi.bookshelf;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,54 +8,37 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class UserProfile extends Fragment implements View.OnClickListener{
+public class UserProfile extends Fragment implements View.OnClickListener,View.OnLongClickListener{
 
 
     @InjectView(R.id.imageProPhoto)
     ImageView imgProfilePhoto;
-
-    @InjectView(R.id.imageButtonEdit)
-    ImageButton btnEditPhoto;
-
     @InjectView(R.id.editTextUserbio)
     EditText txtuserBio;
-
     @InjectView(R.id.buttonSubmitUserBio)
     Button btnSubmitUserBio;
-
     @InjectView(R.id.buttonEditProfile)
     Button btnEditProfile;
-
     @InjectView(R.id.buttonLogout)
     Button btnLogout;
 
-    Uri photoUri;
-
+    Uri photoUri, cropUri, intentUri;
 
     @Nullable
     @Override
@@ -67,26 +48,31 @@ public class UserProfile extends Fragment implements View.OnClickListener{
         ButterKnife.inject(this, view);
 
         imgProfilePhoto.setOnClickListener(this);
-        btnEditPhoto.setOnClickListener(this);
         btnSubmitUserBio.setOnClickListener(this);
         btnEditProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
-
+        imgProfilePhoto.setOnLongClickListener(this);
 
         return view;
-
     }
 
     @Override
     public void onClick(View v) {
         int id=v.getId();
+
         if (id==R.id.buttonLogout){
 
         }else if (id==R.id.buttonEditProfile){
 
         }else if (id==R.id.buttonSubmitUserBio){
 
-        }else if (id==R.id.imageButtonEdit){
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        int id = v.getId();
+        if (id==R.id.imageProPhoto){
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.Theme_MyDialog);
             builder.setTitle("Profile photo from");
             String[] options = {"Camera","Gallery","Remove photo"};
@@ -107,7 +93,7 @@ public class UserProfile extends Fragment implements View.OnClickListener{
 
                             }catch (ActivityNotFoundException e){
                                 e.printStackTrace();
-                                }
+                            }
                             break;
 
                         case 1:
@@ -129,10 +115,8 @@ public class UserProfile extends Fragment implements View.OnClickListener{
             });
             builder.create().show();
 
-        }else if (id==R.id.imageProPhoto){
-            Intent intent= new Intent(getActivity(),ProfilePhoto.class);
-            startActivity(intent);
         }
+        return false;
     }
 
     @Override
@@ -154,14 +138,15 @@ public class UserProfile extends Fragment implements View.OnClickListener{
         }
 
     }
+
     private void cropImage(){
         try{
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             cropIntent.setDataAndType(photoUri,"image/*");
 
             cropIntent.putExtra("crop","true");
-            cropIntent.putExtra("outputX",256);
-            cropIntent.putExtra("outputY",256);
+            cropIntent.putExtra("outputX",320);
+            cropIntent.putExtra("outputY",320);
             cropIntent.putExtra("aspectX",1);
             cropIntent.putExtra("aspectY",1);
             cropIntent.putExtra("scaleUpIfNeeded",true);
@@ -173,5 +158,4 @@ public class UserProfile extends Fragment implements View.OnClickListener{
         }
 
     }
-
 }

@@ -34,4 +34,6 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/CircleImageView/gradle/wrapper/gradle-wrapper.jar')
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

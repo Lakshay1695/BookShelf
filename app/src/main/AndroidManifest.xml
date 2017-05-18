@@ -49,8 +49,6 @@
         </service>
         <!-- [END firebase_iid_service] -->
 
-        <activity android:name=".ProfilePhoto"></activity>
-
     </application>
 
 </manifest>
