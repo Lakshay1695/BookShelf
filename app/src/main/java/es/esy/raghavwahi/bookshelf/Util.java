@@ -9,10 +9,10 @@ public class Util {
 
     public  static  final  String PREFS_NAME ="user_Prefs";
 
-    public  static  final  String KEY_NAME ="user_Prefs";
-    public  static  final  String KEY_PHONE="user_Prefs";
-    public  static  final  String KEY_EMAIL ="user_Prefs";
-    public  static  final  String KEY_PASSWORD ="user_Prefs";
+    public  static  final  String KEY_NAME ="keyName";
+    public  static  final  String KEY_PHONE="keyPhone";
+    public  static  final  String KEY_EMAIL ="keyEmail";
+    public  static  final  String KEY_PASSWORD ="keyPassword";
 
     //URL
     public static final String INSERT_USER_PHP = URI+"/insert.php";

@@ -121,7 +121,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 map.put("email",user.getEmail());
                 map.put("password",user.getPassword());
                 map.put("token",token);
-
                 return map;
             }
         };

@@ -17,14 +17,12 @@ public class User {
         this.password = password;
     }
 
-    //Getters and Setters
     public String getName() {
         return name;
     }
 
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return name;
     }
 
     public String getPhone() {

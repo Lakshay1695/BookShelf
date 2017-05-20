@@ -2,8 +2,10 @@ package es.esy.raghavwahi.bookshelf;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,14 +32,19 @@ public class UserProfile extends Fragment implements View.OnClickListener,View.O
 
     @InjectView(R.id.imageProPhoto)
     ImageView imgProfilePhoto;
-    @InjectView(R.id.editTextUserbio)
-    EditText txtuserBio;
-    @InjectView(R.id.buttonSubmitUserBio)
-    Button btnSubmitUserBio;
+
     @InjectView(R.id.buttonEditProfile)
     Button btnEditProfile;
     @InjectView(R.id.buttonLogout)
     Button btnLogout;
+
+    @InjectView(R.id.textuserNameDisplay)
+    TextView txtUserName;
+    @InjectView(R.id.textUserbio)
+    TextView txtuserBio;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Uri photoUri, cropUri, intentUri;
 
@@ -47,12 +55,13 @@ public class UserProfile extends Fragment implements View.OnClickListener,View.O
 
         ButterKnife.inject(this, view);
 
-        imgProfilePhoto.setOnClickListener(this);
-        btnSubmitUserBio.setOnClickListener(this);
         btnEditProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         imgProfilePhoto.setOnLongClickListener(this);
 
+        sharedPreferences = this.getActivity().getSharedPreferences(Util.PREFS_NAME, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        txtUserName.setText(sharedPreferences.getString(Util.KEY_NAME,null));
         return view;
     }
 
@@ -63,8 +72,6 @@ public class UserProfile extends Fragment implements View.OnClickListener,View.O
         if (id==R.id.buttonLogout){
 
         }else if (id==R.id.buttonEditProfile){
-
-        }else if (id==R.id.buttonSubmitUserBio){
 
         }
     }
